@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
+            <div>
                 <div class="card">
                     <div class="card-header">Listado de Libros Disponible para la venta</div>
 
@@ -30,9 +30,19 @@
                                     <td><input class="cantidad" type="number" min="0" max="20" value="0"
                                                data-quantity= {{$book->id}}></td>
                                     <td>
-                                        <input class="botonComprar" type="button" data-id="{{$book->id}}"
+                                        <input class="botonComprar btn btn-success btn-sm" type="button" data-id="{{$book->id}}"
                                                value="Comprar">
                                     </td>
+                                    <td>
+                                        <form method="post" action="{{route('books.destroy',['id'=>$book->id])}}">
+                                            @csrf
+                                            {!! method_field('delete') !!}
+                                            <input class="btn btn-danger btn-sm" type="submit" value="Borrar">
+                                        </form>
+                                    </td>
+                                    <td><a href='{{route('books.edit',['id'=>$book->id])}}' class="btn btn-primary btn-sm">Editar</a></td>
+
+
                                 </tr>
                             @endforeach
                         </table>
